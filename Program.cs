@@ -42,9 +42,9 @@
 // }
 
 //2 задача//
-using System;
+// using System;
 
-class Program
+// class Program
 // {
 //     static void Main()
 //     {
@@ -93,3 +93,72 @@ class Program
 //         }
 //     }
 // }
+
+//задача 3//
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int[,] matrix = GenerateRandomMatrix(3, 4);
+
+        Console.WriteLine("Исходный массив:");
+        PrintMatrix(matrix);
+
+        int minRow = FindRowWithMinSum(matrix);
+
+        Console.WriteLine($"\nСтрока с наименьшей суммой элементов: {minRow + 1}");
+    }
+
+    static int[,] GenerateRandomMatrix(int rows, int cols)
+    {
+        Random random = new Random();
+        int[,] matrix = new int[rows, cols];
+
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
+            {
+                matrix[row, col] = random.Next(1, 101); 
+            }
+        }
+
+        return matrix;
+    }
+
+    static int FindRowWithMinSum(int[,] matrix)
+    {
+        int minSum = int.MaxValue;
+        int minRow = -1;
+
+        for (int row = 0; row < matrix.GetLength(0); row++)
+        {
+            int currentSum = 0;
+            for (int col = 0; col < matrix.GetLength(1); col++)
+            {
+                currentSum += matrix[row, col];
+            }
+
+            if (currentSum < minSum)
+            {
+                minSum = currentSum;
+                minRow = row;
+            }
+        }
+
+        return minRow;
+    }
+
+    static void PrintMatrix(int[,] matrix)
+    {
+        for (int row = 0; row < matrix.GetLength(0); row++)
+        {
+            for (int col = 0; col < matrix.GetLength(1); col++)
+            {
+                Console.Write(matrix[row, col] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
